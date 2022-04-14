@@ -16,11 +16,12 @@ import React, {useState} from "react";
 import {calendar} from "ionicons/icons";
 import CardComponent from "../components/CardComponent";
 import {format} from "../components/CardComponent";
+import {Hook} from "../functions/hooks";
 
 const Home: React.FC = () => {
 
-    const [selectedDate, setSelectedDate] = useState<any | null>('1986-08-11');
-    const [targetDate, setTargetDate] = useState<any | null>('2022-08-11');
+    const [selectedDate, setSelectedDate] = Hook('birthDate', '');
+    const [targetDate, setTargetDate] = useState<any | null>(new Date().toISOString());
 
     return (
         <IonPage>
@@ -32,9 +33,11 @@ const Home: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
+                {selectedDate &&
+                <CardComponent Date={selectedDate} targetDate={targetDate} />
+                }
                 <IonItem>
-                    <IonLabel position="floating">Date of Birth:</IonLabel>
-                    <IonInput id="date-input-1" value={format(selectedDate)}/>
+                    <IonLabel position="fixed">Date of Birth:</IonLabel>
                     <IonButton fill="clear" id="open-date-input-1">
                         <IonIcon icon={calendar}/>
                     </IonButton>
@@ -54,7 +57,7 @@ const Home: React.FC = () => {
                                      onIonChange={(event) => setTargetDate(event.detail.value)}/>
                     </IonPopover>
                 </IonItem>
-                <CardComponent Date={selectedDate} targetDate={targetDate} />
+
             </IonContent>
 
         </IonPage>

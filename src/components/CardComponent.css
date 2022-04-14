@@ -1,0 +1,11 @@
+.bio-card .physical {
+    color: green;
+}
+
+.bio-card .emotional {
+    color: red;
+}
+
+.bio-card .intellectual {
+    color: blue;
+}

@@ -2,11 +2,13 @@ import React from 'react';
 import {IonCard, IonCardContent, IonCardHeader, IonCardTitle} from "@ionic/react";
 import dayjs from "dayjs";
 import {Biorhythms} from "../functions/calc";
+import Chart from "./Chart";
+import './CardComponent.css';
 
 
 interface ContainerProps {
-    Date: Date;
-    targetDate: Date;
+    Date: any;
+    targetDate: any;
 }
 export const format = (value: any) => {
     return dayjs(value).format("D MMMM YYYY");
@@ -18,16 +20,17 @@ const CardComponent: React.FC<ContainerProps> = ({Date, targetDate}) => {
 
 
     return(
-        <IonCard className="ion-text-center">
+        <IonCard className="bio-card ion-text-center">
             <IonCardHeader>
                 <IonCardTitle>
-                    {format(Date)}
+                    {format(targetDate)}
                 </IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-                <p>physical: {Math.round(physical * 100)}%</p>
-                <p>emotional: {Math.round(emotional * 100)}%</p>
-                <p>intellectual: {Math.round(intellectual * 100)}%</p>
+                <Chart Date={Date} targetDate={targetDate}/>
+                <p className="physical">physical: {Math.round(physical * 100)}%</p>
+                <p className="emotional">emotional: {Math.round(emotional * 100)}%</p>
+                <p className="intellectual">intellectual: {Math.round(intellectual * 100)}%</p>
             </IonCardContent>
         </IonCard>
 
